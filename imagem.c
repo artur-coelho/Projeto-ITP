@@ -1,10 +1,10 @@
 #include "imagem.h"
 
-//Implementação da função de alocar espaço para imagem
-void alocar_imagem(Imagem *imagem) {
-	imagem->img = malloc(imagem->altura*sizeof(Pixel*));
-	for(int i = 0; i < imagem->altura; i++) {
-		imagem->img[i] = malloc(imagem->largura*sizeof(Pixel));
+//Implementação da função de alocar espaço para a matriz imagem
+void alocar_imagem(Imagem *imagem_alocada) {
+	imagem_alocada->img = malloc(imagem_alocada->altura*sizeof(Pixel*));
+	for(int i = 0; i < imagem_alocada->altura; i++) {
+		imagem_alocada->img[i] = malloc(imagem_alocada->largura*sizeof(Pixel));
 	}
 }
 //Implementação da função para desalocar o espaço da imagem
@@ -16,10 +16,10 @@ void desalocar_imagem(Imagem *imagem) {
 	free(imagem);
 }
 //Implementação da função para ler a imagem de um arquivo, retorna um tipo imagem alocado dinamicamente:
-Imagem* ler_imagem(void) {
+Imagem* ler_imagem(char* arquivo) {
 	FILE *arquivo_lido;
-	Imagem *imagem_lida = malloc(1*sizeof(Imagem));
-	arquivo_lido = fopen("Images/imagem1.ppm", "r");
+	Imagem *imagem_lida = (Imagem *)malloc(sizeof(Imagem));
+	arquivo_lido = fopen(arquivo, "r");
 	if (arquivo_lido==NULL) {//Verificar se o arquivo a ser lido existe
 		printf("Erro na abertura do arquivo.\n");
 		return imagem_lida;
@@ -39,9 +39,9 @@ Imagem* ler_imagem(void) {
 	}
 }
 //Implementação da função que imprime a imagem em formato ppm
-void imprimir_imagem(Imagem *imagem) {
+void imprimir_imagem(Imagem *imagem, char* arquivo) {
 	FILE *arquivo_escrito;
-	arquivo_escrito = fopen("Images/imagem_editada.ppm", "w");
+	arquivo_escrito = fopen(arquivo, "w");
 	fprintf(arquivo_escrito, "%s\n", imagem->identificador);
 	fprintf(arquivo_escrito, "%i %i\n%i\n", imagem->altura,
 			imagem->largura, imagem->color_range);
@@ -53,15 +53,20 @@ void imprimir_imagem(Imagem *imagem) {
 		}
 		fclose(arquivo_escrito);
 }
-//Implementação da função para deixar a foto em escala cinza
-void gray_scale(Imagem *imagem) {
-	int media;
-	for(int i = 0; i < imagem->altura; i++) {
-		for(int j = 0; j < imagem->largura; j++) {
-			media = (imagem->img[i][j].red + imagem->img[i][j].green + imagem->img[i][j].blue) / 3;
-			imagem->img[i][j].red = media;
-			imagem->img[i][j].green = media;
-			imagem->img[i][j].blue = media;
+
+Imagem* imagem_copia(Imagem *modelo) {
+	Imagem* copia = (Imagem *)malloc(sizeof(Imagem));
+	copia->identificador = modelo->identificador;
+	copia->altura = modelo->altura;
+	copia->largura = copia->largura;
+	copia->color_range = modelo->color_range;
+	alocar_imagem(copia);
+	for(int i = 0; i < copia->altura; i++) {
+		for(int j = 0; j < copia->largura; j++) {
+			copia->img[i][j].red = modelo->img[i][j].red;
+			copia->img[i][j].green = modelo->img[i][j].green;
+			copia->img[i][j].blue = modelo->img[i][j].blue;
 		}
 	}
+	return copia;
 }
