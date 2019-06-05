@@ -2,15 +2,14 @@
 
 //Implementação da função de alocar espaço para a matriz imagem
 Imagem* alocar_imagem(int altura, int largura) {
-	printf("%s\n", "entrou");
 	Imagem* imagem_alocada = (Imagem *)malloc(sizeof(Imagem));
 	imagem_alocada->identificador = "P3";
 	imagem_alocada->altura = altura;
 	imagem_alocada->largura = largura;
 	imagem_alocada->color_range = 255;
-	imagem_alocada->img = malloc(altura*sizeof(Pixel*));
+	imagem_alocada->img = (Pixel **)malloc(altura*sizeof(Pixel*));
 	for(int i = 0; i < altura; i++) {
-		imagem_alocada->img[i] = malloc(largura*sizeof(Pixel));
+		imagem_alocada->img[i] = (Pixel *)malloc(largura*sizeof(Pixel));
 	}
 	return imagem_alocada;
 }
@@ -62,13 +61,10 @@ void imprimir_imagem(Imagem *imagem, char* arquivo) {
 		fclose(arquivo_escrito);
 }
 
-/*Imagem* imagem_copia(Imagem *modelo) {
-	Imagem* copia = (Imagem *)malloc(sizeof(Imagem));
+Imagem* imagem_copia(Imagem *modelo) {
+	Imagem* copia = alocar_imagem(modelo->altura, modelo->largura);
 	copia->identificador = modelo->identificador;
-	copia->altura = modelo->altura;
-	copia->largura = copia->largura;
 	copia->color_range = modelo->color_range;
-	alocar_imagem(copia);
 	for(int i = 0; i < copia->altura; i++) {
 		for(int j = 0; j < copia->largura; j++) {
 			copia->img[i][j].red = modelo->img[i][j].red;
@@ -77,4 +73,4 @@ void imprimir_imagem(Imagem *imagem, char* arquivo) {
 		}
 	}
 	return copia;
-}*/
+}

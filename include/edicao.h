@@ -7,5 +7,9 @@
 void gray_scale(Imagem *imagem);
 //Assinatura da função que rotaciona a imagem 
 void rotate(Imagem *imagem);
+//Assinatura da função pra dar zoom a imagem
+void zoom(Imagem* imagem, int n);
+//Assinatura da função para reduzir a imagem
+void reduce(Imagem* imagem, int n);
 
 #endif
