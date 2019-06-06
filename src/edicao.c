@@ -44,24 +44,31 @@ void zoom(Imagem* imagem, int n) {
 
 }
 
-/*void reduce(Imagem *imagem, int n){
+void reduce(Imagem *imagem, int n){
 	int altura = imagem->altura;
 	int largura = imagem->largura;
 	Imagem *imagem_reduzida = alocar_imagem(altura/n, largura/n);
-	unsigned char r_acumulado, g_acumulado, b_acumulado;
-	unsigned char r_media, g_media, b_media;
+	//unsigned char r_acumulado, g_acumulado, b_acumulado;
+	Pixel matriz_aux[altura/n][largura/n];
 
-	for(int i = 0; i < imagem_reduzida->altura; i = i + n) {
-		for(int j = 0; j < imagem_reduzida->largura; j = j + n) {
-			for(int z = 0; z < n; z++) {
-				r_acumulado = r_acumulado + imagem->img.red[i*z][j*z];
-				g_acumulado = g_acumulado + imagem->img.green[i*z][j*z];
-				b_acumulado = b_acumulado + imagem->img.blue[i*z][j*z];
-			}
-			r_media = r_acumulado/n;
-			g_media = g_acumulado/n;
-			b_media = b_acumulado/n;
-
+	for(int i = 0; i < imagem->altura; i++) {
+		for(int j = 0; j < imagem->largura; j++) {
+			matriz_aux[i/n][j/n].red = matriz_aux[i/n][j/n].red + imagem->img[i][j].red/n;
+			matriz_aux[i/n][j/n].green = matriz_aux[i/n][j/n].green + imagem->img[i][j].green/n;
+			matriz_aux[i/n][j/n].blue = matriz_aux[i/n][j/n].blue + imagem->img[i][j].blue/n;
 		}
 	}
-}*/
+
+	for(int i = 0; i < imagem_reduzida->altura; i++) {
+		for(int j = 0; j < imagem_reduzida->largura; j++) {
+			imagem_reduzida->img[i][j].red =  (matriz_aux[i][j].red);
+			imagem_reduzida->img[i][j].green = (matriz_aux[i][j].green);
+			imagem_reduzida->img[i][j].blue = (matriz_aux[i][j].blue);
+		}
+	}
+
+	desalocar_imagem(imagem);
+	imagem = imagem_copia(imagem_reduzida);
+	desalocar_imagem(imagem_reduzida);
+
+}

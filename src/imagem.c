@@ -30,10 +30,8 @@ Imagem* ler_imagem(char* arquivo) {
 		printf("Erro na abertura do arquivo.\n");
 		return NULL;
 	} else {
-		//unsigned long len = 0;//variável para uso da função getline
-		//getline(&imagem_lida->identificador, &len, arquivo_lido);
 		int altura, largura, color_range;
-		fscanf(arquivo_lido, "P3 %i %i\n %i\n", &altura, &largura, &color_range);
+		fscanf(arquivo_lido, "P3 %i %i\n %i\n", &largura, &altura, &color_range);
 		imagem_lida = alocar_imagem(altura, largura);
 		for(int i = 0; i < imagem_lida->altura; i++) {
 			for(int j = 0; j < imagem_lida->largura; j++) {
@@ -50,8 +48,8 @@ void imprimir_imagem(Imagem *imagem, char* arquivo) {
 	FILE *arquivo_escrito;
 	arquivo_escrito = fopen(arquivo, "w");
 	fprintf(arquivo_escrito, "%s\n", imagem->identificador);
-	fprintf(arquivo_escrito, "%i %i\n%i\n", imagem->altura,
-			imagem->largura, imagem->color_range);
+	fprintf(arquivo_escrito, "%i %i\n%i\n", imagem->largura,
+			imagem->altura, imagem->color_range);
 	for(int i = 0; i < imagem->altura; i++) {
 			for(int j = 0; j < imagem->largura; j++) {
 				fprintf(arquivo_escrito, "%hhu\n%hhu\n%hhu\n", imagem->img[i][j].red, 
