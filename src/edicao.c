@@ -90,7 +90,7 @@ void reduce(Imagem *imagem, int n){
 	desalocar_imagem(imagem_reduzida);
 
 }
-
+//Implementação do filtro de blurring
 void blurring(Imagem *imagem) {
 	int altura = imagem->altura;
 	int largura = imagem->largura;
@@ -208,4 +208,293 @@ void blurring(Imagem *imagem) {
 	desalocar_imagem(imagem);
 	imagem = imagem_copia(imagem_borrada);
 	desalocar_imagem(imagem_borrada);
+}
+
+void sharpening(Imagem *imagem) {
+	int altura = imagem->altura;
+	int largura = imagem->largura;
+	int contador_red, contador_green, contador_blue, contador_kernel;
+	Imagem *imagem_sharp = alocar_imagem(altura, largura);
+	int kernel[9] = {0, -1, 0, -1, 5, -1, 0, -1, 0};
+
+	for(int i = 0; i < altura; i++) {
+		for(int j = 0; j < largura; j++) {
+			contador_red = 0;
+			contador_green = 0;
+			contador_blue = 0;
+			if(i == 0 && j == 0) {
+				contador_kernel = 4;
+				for(int x = i; x < i+2; x++) {
+					for(int y = j; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_sharp->img[i][j].red = contador_red;
+				imagem_sharp->img[i][j].green = contador_green;
+				imagem_sharp->img[i][j].blue = contador_blue;
+			} else if(i == 0 && j == largura-1) {
+				contador_kernel = 3;
+				for(int x = i; x < i+2; x++) {
+					for(int y = j-1; y < j+1; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_sharp->img[i][j].red = contador_red;
+				imagem_sharp->img[i][j].green = contador_green;
+				imagem_sharp->img[i][j].blue = contador_blue;
+			} else if(i == altura-1 && j == 0) {
+				contador_kernel = 1;
+				for(int x = i-1; x < i+1; x++) {
+					for(int y = j; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_sharp->img[i][j].red = contador_red;
+				imagem_sharp->img[i][j].green = contador_green;
+				imagem_sharp->img[i][j].blue = contador_blue;
+			} else if(i == altura-1 && j == largura-1) {
+				contador_kernel = 0;
+				for(int x = i-1; x < i+1; x++) {
+					for(int y = j-1; y < j+1; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_sharp->img[i][j].red = contador_red;
+				imagem_sharp->img[i][j].green = contador_green;
+				imagem_sharp->img[i][j].blue = contador_blue;
+			} else if(i == 0) {
+				contador_kernel = 3;
+				for(int x = i; x < i+2; x++) {
+					for(int y = j-1; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+				}
+				imagem_sharp->img[i][j].red = contador_red;
+				imagem_sharp->img[i][j].green = contador_green;
+				imagem_sharp->img[i][j].blue = contador_blue;
+			} else if(j == 0) {
+				contador_kernel = 1;
+				for(int x = i-1; x < i+2; x++) {
+					for(int y = j; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_sharp->img[i][j].red = contador_red;
+				imagem_sharp->img[i][j].green = contador_green;
+				imagem_sharp->img[i][j].blue = contador_blue;
+			} else if(i == altura-1) {
+				contador_kernel = 0;
+				for(int x = i-1; x < i+1; x++) {
+					for(int y = j-1; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+				}
+				imagem_sharp->img[i][j].red = contador_red;
+				imagem_sharp->img[i][j].green = contador_green;
+				imagem_sharp->img[i][j].blue = contador_blue;
+			} else if(j == largura-1) {
+				contador_kernel = 0;
+				for(int x = i-1; x < i+2; x++) {
+					for(int y = j-1; y < j+1; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_sharp->img[i][j].red = contador_red;
+				imagem_sharp->img[i][j].green = contador_green;
+				imagem_sharp->img[i][j].blue = contador_blue;
+			} else {
+				contador_kernel = 0;
+				for(int x = i-1; x < i+2; x++) {
+					for(int y = j-1; y < j+2; y++) {
+						contador_red += (imagem->img[x][y].red*kernel[contador_kernel]);
+						contador_green += (imagem->img[x][y].green*kernel[contador_kernel]);
+						contador_blue += (imagem->img[x][y].blue*kernel[contador_kernel]);
+						contador_kernel++;
+					}
+				}
+				imagem_sharp->img[i][j].red = contador_red;
+				imagem_sharp->img[i][j].green = contador_green;
+				imagem_sharp->img[i][j].blue = contador_blue;
+			}
+
+		}
+	}
+	desalocar_imagem(imagem);
+	imagem = imagem_copia(imagem_sharp);
+	desalocar_imagem(imagem_sharp);
+
+}
+
+void edge_detection(Imagem *imagem) {
+	int altura = imagem->altura;
+	int largura = imagem->largura;
+	int contador_red, contador_green, contador_blue, contador_kernel;
+	Imagem *imagem_edge = alocar_imagem(altura, largura);
+	int kernel[9] = {-1, -1, -1, -1, 8, -1, -1, -1, -1};
+
+	for(int i = 0; i < altura; i++) {
+		for(int j = 0; j < largura; j++) {
+			contador_red = 0;
+			contador_green = 0;
+			contador_blue = 0;
+			if(i == 0 && j == 0) {
+				contador_kernel = 4;
+				for(int x = i; x < i+2; x++) {
+					for(int y = j; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_edge->img[i][j].red = contador_red;
+				imagem_edge->img[i][j].green = contador_green;
+				imagem_edge->img[i][j].blue = contador_blue;
+			} else if(i == 0 && j == largura-1) {
+				contador_kernel = 3;
+				for(int x = i; x < i+2; x++) {
+					for(int y = j-1; y < j+1; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_edge->img[i][j].red = contador_red;
+				imagem_edge->img[i][j].green = contador_green;
+				imagem_edge->img[i][j].blue = contador_blue;
+			} else if(i == altura-1 && j == 0) {
+				contador_kernel = 1;
+				for(int x = i-1; x < i+1; x++) {
+					for(int y = j; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_edge->img[i][j].red = contador_red;
+				imagem_edge->img[i][j].green = contador_green;
+				imagem_edge->img[i][j].blue = contador_blue;
+			} else if(i == altura-1 && j == largura-1) {
+				contador_kernel = 0;
+				for(int x = i-1; x < i+1; x++) {
+					for(int y = j-1; y < j+1; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_edge->img[i][j].red = contador_red;
+				imagem_edge->img[i][j].green = contador_green;
+				imagem_edge->img[i][j].blue = contador_blue;
+			} else if(i == 0) {
+				contador_kernel = 3;
+				for(int x = i; x < i+2; x++) {
+					for(int y = j-1; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+				}
+				imagem_edge->img[i][j].red = contador_red;
+				imagem_edge->img[i][j].green = contador_green;
+				imagem_edge->img[i][j].blue = contador_blue;
+			} else if(j == 0) {
+				contador_kernel = 1;
+				for(int x = i-1; x < i+2; x++) {
+					for(int y = j; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_edge->img[i][j].red = contador_red;
+				imagem_edge->img[i][j].green = contador_green;
+				imagem_edge->img[i][j].blue = contador_blue;
+			} else if(i == altura-1) {
+				contador_kernel = 0;
+				for(int x = i-1; x < i+1; x++) {
+					for(int y = j-1; y < j+2; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+				}
+				imagem_edge->img[i][j].red = contador_red;
+				imagem_edge->img[i][j].green = contador_green;
+				imagem_edge->img[i][j].blue = contador_blue;
+			} else if(j == largura-1) {
+				contador_kernel = 0;
+				for(int x = i-1; x < i+2; x++) {
+					for(int y = j-1; y < j+1; y++) {
+						contador_red += imagem->img[x][y].red*kernel[contador_kernel];
+						contador_green += imagem->img[x][y].green*kernel[contador_kernel];
+						contador_blue += imagem->img[x][y].blue*kernel[contador_kernel];
+						contador_kernel++;
+					}
+					contador_kernel++;
+				}
+				imagem_edge->img[i][j].red = contador_red;
+				imagem_edge->img[i][j].green = contador_green;
+				imagem_edge->img[i][j].blue = contador_blue;
+			} else {
+				contador_kernel = 0;
+				for(int x = i-1; x < i+2; x++) {
+					for(int y = j-1; y < j+2; y++) {
+						contador_red += (imagem->img[x][y].red*kernel[contador_kernel]);
+						contador_green += (imagem->img[x][y].green*kernel[contador_kernel]);
+						contador_blue += (imagem->img[x][y].blue*kernel[contador_kernel]);
+						contador_kernel++;
+					}
+				}
+				imagem_edge->img[i][j].red = contador_red;
+				imagem_edge->img[i][j].green = contador_green;
+				imagem_edge->img[i][j].blue = contador_blue;
+			}
+
+		}
+	}
+	desalocar_imagem(imagem);
+	imagem = imagem_copia(imagem_edge);
+	desalocar_imagem(imagem_edge);
 }

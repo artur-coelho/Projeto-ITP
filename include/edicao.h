@@ -12,7 +12,11 @@ void rotate(Imagem *imagem, int angulo, char sentido);
 void zoom(Imagem* imagem, int n);
 //Assinatura da função para reduzir a imagem
 void reduce(Imagem* imagem, int n);
-
+//Assinatura da função que aplica o filtro de blurring
 void blurring(Imagem *imagem);
+//Assinatura da função para o filtro de sharpening
+void sharpening(Imagem *imagem);
+
+void edge_detection(Imagem *imagem);
 
 #endif
