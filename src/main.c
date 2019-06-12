@@ -4,7 +4,7 @@ int main() {
 
 	Imagem *img1 = NULL;
 	img1 = ler_imagem("Images/imagem1.ppm");
-	//reduce(img1, 5);
+	//reduce(img1, 2);
 	//img2 = imagem_copia(img1);
 	//zoom(img1, 3);
 	//rotate(img1, 270, 'h');

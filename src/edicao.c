@@ -12,7 +12,8 @@ void gray_scale(Imagem *imagem) {
 		}
 	}
 }
-//Implementação da função pra rotacionar a imagem, dado seu ângulo e o sentido (horarío ou anti-horario)
+
+//Implementação da função pra rotacionar a imagem, dado seu ângulo e o sentido horarío("h") ou anti-horario("a")
 void rotate(Imagem *imagem, int angulo, char sentido) {
 	Imagem *temporaria = NULL;
 	if((angulo != 90 && angulo != 180 && angulo != 270)
@@ -54,6 +55,7 @@ void rotate(Imagem *imagem, int angulo, char sentido) {
 	imagem = imagem_copia(temporaria);
 	desalocar_imagem(temporaria);
 }
+
 //Implementação da função para ampliar a imagem em um número "n" de vezes
 void zoom(Imagem* imagem, int n) {
 	int altura = imagem->altura;
@@ -69,6 +71,7 @@ void zoom(Imagem* imagem, int n) {
 	desalocar_imagem(imagem_ampliada);
 
 }
+
 //Implementação da função para reduzir a imagem em um número "n" de vezes
 void reduce(Imagem *imagem, int n){
 	int altura = imagem->altura;
@@ -90,6 +93,7 @@ void reduce(Imagem *imagem, int n){
 	desalocar_imagem(imagem_reduzida);
 
 }
+
 //Implementação do filtro de blurring
 void blurring(Imagem *imagem) {
 	int altura = imagem->altura;
@@ -210,6 +214,7 @@ void blurring(Imagem *imagem) {
 	desalocar_imagem(imagem_borrada);
 }
 
+//Implementação da função que a plica o filtro sharpening
 void sharpening(Imagem *imagem) {
 	int altura = imagem->altura;
 	int largura = imagem->largura;
@@ -233,6 +238,12 @@ void sharpening(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_sharp->img[i][j].red = contador_red;
 				imagem_sharp->img[i][j].green = contador_green;
 				imagem_sharp->img[i][j].blue = contador_blue;
@@ -247,6 +258,12 @@ void sharpening(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_sharp->img[i][j].red = contador_red;
 				imagem_sharp->img[i][j].green = contador_green;
 				imagem_sharp->img[i][j].blue = contador_blue;
@@ -261,6 +278,12 @@ void sharpening(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_sharp->img[i][j].red = contador_red;
 				imagem_sharp->img[i][j].green = contador_green;
 				imagem_sharp->img[i][j].blue = contador_blue;
@@ -275,6 +298,12 @@ void sharpening(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_sharp->img[i][j].red = contador_red;
 				imagem_sharp->img[i][j].green = contador_green;
 				imagem_sharp->img[i][j].blue = contador_blue;
@@ -288,6 +317,12 @@ void sharpening(Imagem *imagem) {
 						contador_kernel++;
 					}
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_sharp->img[i][j].red = contador_red;
 				imagem_sharp->img[i][j].green = contador_green;
 				imagem_sharp->img[i][j].blue = contador_blue;
@@ -302,6 +337,12 @@ void sharpening(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_sharp->img[i][j].red = contador_red;
 				imagem_sharp->img[i][j].green = contador_green;
 				imagem_sharp->img[i][j].blue = contador_blue;
@@ -315,6 +356,12 @@ void sharpening(Imagem *imagem) {
 						contador_kernel++;
 					}
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_sharp->img[i][j].red = contador_red;
 				imagem_sharp->img[i][j].green = contador_green;
 				imagem_sharp->img[i][j].blue = contador_blue;
@@ -329,6 +376,12 @@ void sharpening(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_sharp->img[i][j].red = contador_red;
 				imagem_sharp->img[i][j].green = contador_green;
 				imagem_sharp->img[i][j].blue = contador_blue;
@@ -342,6 +395,12 @@ void sharpening(Imagem *imagem) {
 						contador_kernel++;
 					}
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_sharp->img[i][j].red = contador_red;
 				imagem_sharp->img[i][j].green = contador_green;
 				imagem_sharp->img[i][j].blue = contador_blue;
@@ -355,6 +414,7 @@ void sharpening(Imagem *imagem) {
 
 }
 
+//Implementação da função para detecção de bordas
 void edge_detection(Imagem *imagem) {
 	int altura = imagem->altura;
 	int largura = imagem->largura;
@@ -378,6 +438,12 @@ void edge_detection(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_edge->img[i][j].red = contador_red;
 				imagem_edge->img[i][j].green = contador_green;
 				imagem_edge->img[i][j].blue = contador_blue;
@@ -392,6 +458,12 @@ void edge_detection(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_edge->img[i][j].red = contador_red;
 				imagem_edge->img[i][j].green = contador_green;
 				imagem_edge->img[i][j].blue = contador_blue;
@@ -406,6 +478,12 @@ void edge_detection(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_edge->img[i][j].red = contador_red;
 				imagem_edge->img[i][j].green = contador_green;
 				imagem_edge->img[i][j].blue = contador_blue;
@@ -420,6 +498,12 @@ void edge_detection(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_edge->img[i][j].red = contador_red;
 				imagem_edge->img[i][j].green = contador_green;
 				imagem_edge->img[i][j].blue = contador_blue;
@@ -433,6 +517,12 @@ void edge_detection(Imagem *imagem) {
 						contador_kernel++;
 					}
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_edge->img[i][j].red = contador_red;
 				imagem_edge->img[i][j].green = contador_green;
 				imagem_edge->img[i][j].blue = contador_blue;
@@ -447,6 +537,12 @@ void edge_detection(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_edge->img[i][j].red = contador_red;
 				imagem_edge->img[i][j].green = contador_green;
 				imagem_edge->img[i][j].blue = contador_blue;
@@ -460,6 +556,12 @@ void edge_detection(Imagem *imagem) {
 						contador_kernel++;
 					}
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_edge->img[i][j].red = contador_red;
 				imagem_edge->img[i][j].green = contador_green;
 				imagem_edge->img[i][j].blue = contador_blue;
@@ -474,6 +576,12 @@ void edge_detection(Imagem *imagem) {
 					}
 					contador_kernel++;
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_edge->img[i][j].red = contador_red;
 				imagem_edge->img[i][j].green = contador_green;
 				imagem_edge->img[i][j].blue = contador_blue;
@@ -487,6 +595,12 @@ void edge_detection(Imagem *imagem) {
 						contador_kernel++;
 					}
 				}
+				if (contador_red > 255) {contador_red = 255;}
+				if (contador_green > 255) {contador_green = 255;}
+				if (contador_blue > 255) {contador_blue = 255;}
+				if (contador_red < 0) {contador_red = 0;}
+				if (contador_green < 0) {contador_green = 0;}
+				if (contador_blue < 0) {contador_blue = 0;}
 				imagem_edge->img[i][j].red = contador_red;
 				imagem_edge->img[i][j].green = contador_green;
 				imagem_edge->img[i][j].blue = contador_blue;
