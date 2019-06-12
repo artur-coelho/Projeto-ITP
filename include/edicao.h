@@ -13,4 +13,6 @@ void zoom(Imagem* imagem, int n);
 //Assinatura da função para reduzir a imagem
 void reduce(Imagem* imagem, int n);
 
+void blurring(Imagem *imagem);
+
 #endif
