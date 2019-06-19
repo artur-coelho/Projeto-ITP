@@ -1,9 +1,14 @@
 #include "interface.h"
 
+void carregar_imagem(Imagem* imagem) {
+	imagem  = ler_imagem("Images/imagem1.ppm");
+}
+
 void activate(GtkApplication *app, gpointer user_data) {
 	GtkWidget *window, *image;
 	GtkWidget *vbox, *hbox;
 	GtkWidget *label1, *label2;
+	//Imagem *imagem_carregada = NULL;
 
 	window = gtk_application_window_new (app);
 	gtk_window_set_title(GTK_WINDOW(window), "Editor de imagens ppm");
@@ -56,7 +61,7 @@ void activate(GtkApplication *app, gpointer user_data) {
 	label1 = gtk_label_new("Carregue uma imagem");
 	label2 = gtk_label_new("Aplicação de Filtros");
 
-	//adiciona um widget imagem vazio
+	//adiciona um widget imagem vazio 
 	image = gtk_image_new();
 
 	//adiciona os demais widgets no container vertical (vbox)
@@ -76,7 +81,7 @@ void activate(GtkApplication *app, gpointer user_data) {
 	gtk_container_add(GTK_CONTAINER(window), vbox);
 
 	//conecta o evento clicked do botaoCarregar a funcao carregarImagem
-	g_signal_connect(G_OBJECT(botaoCarregar), "clicked", G_CALLBACK(ler_imagem), "Images/imagem1.ppm");
+	g_signal_connect(G_OBJECT(botaoCarregar), "clicked", G_CALLBACK(carregar_imagem), (gpointer)user_data);
 
 	//conecta o evento clicked do botaoAplicar a funcaoTeste (argv[0] eh o argumento)
 	// g_signal_connect(G_OBJECT(botaoAplicar), "clicked", G_CALLBACK(funcaoAplicar), NULL);

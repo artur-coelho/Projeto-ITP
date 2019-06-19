@@ -3,6 +3,7 @@
 int main(int argc, char** argv) {
 
 	Imagem *img1 = NULL;
+	//char* imagem1 = "Images/imagem1.ppm";
 	//img1 = ler_imagem("Images/imagem1.ppm");
 	//reduce(img1, 2);
 	//img2 = imagem_copia(img1);
@@ -18,7 +19,7 @@ int main(int argc, char** argv) {
  	int status;
 
 	app = gtk_application_new ("org.gtk.example", G_APPLICATION_FLAGS_NONE);
-	g_signal_connect (app, "activate", G_CALLBACK (activate), img1);
+	g_signal_connect (app, "activate", G_CALLBACK(activate), img1);
 	status = g_application_run (G_APPLICATION (app), argc, argv);
 	g_object_unref (app);
 

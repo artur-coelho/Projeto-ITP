@@ -7,6 +7,8 @@
 #include "edicao.h"
 
 
+void carregar_imagem(Imagem* imagem);
+
 void activate(GtkApplication *app, gpointer user_data);
 
 
