@@ -4,5 +4,6 @@
 #include <stdio.h>
 #include "imagem.h"
 #include "edicao.h"
+#include "interface.h"
 
 #endif
